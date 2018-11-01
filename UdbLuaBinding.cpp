@@ -364,6 +364,13 @@ static Atom _getAtom( const QByteArray& s, Transaction* txn )
 
 Atom (*LuaBinding::getAtom)( const QByteArray&, Transaction* txn ) = _getAtom;
 
+static bool _isWritable( quint32 atom, const Obj& o )
+{
+	return false;
+}
+
+bool (*LuaBinding::isWritable)( quint32 atom, const Obj& o ) = _isWritable;
+
 static void _pushObject(lua_State * L, const Obj& o )
 {
 	if( o.isNull() )
