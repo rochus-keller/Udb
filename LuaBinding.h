@@ -20,7 +20,7 @@
 * http://www.gnu.org/copyleft/gpl.html.
 */
 
-#include <Udb/Obj.h>
+#include <Udb/ContentObject.h>
 #include <Script2/ValueBinding.h>
 
 namespace Udb
@@ -37,6 +37,7 @@ namespace Udb
 
 		static QString (*getName)( quint32 atom, Udb::Transaction* txn );
 		static Atom (*getAtom)( const QByteArray&, Udb::Transaction* txn );
+		static bool (*isWritable)( quint32 atom, const Obj& );
 		static void (*pushObject)(lua_State * L, const Obj& );
 		static void install(lua_State * L);
 		static void pushValue(lua_State * L, const Stream::DataCell&, Udb::Transaction* = 0 );
@@ -45,6 +46,7 @@ namespace Udb
 		LuaBinding() {}
 	};
 
+	// ValueBinding for ContentObjects
 	template<class T, class SuperClass = T>
 	class CoBin : public Lua::ValueBinding<T,SuperClass>
 	{
@@ -52,6 +54,9 @@ namespace Udb
 		typedef Lua::ValueBinding<T,SuperClass> Super;
 		static void install( lua_State *L, const char* publicName, const luaL_reg* ms = 0 )
 		{
+			if( !Lua::CheckTypeCompatibility<ContentObject,T>::compatible )
+				throw Lua::ValueBindingBase::Exception( "CoBin only works for ContentObjects and its descendants" );
+
 			Super::install( L, publicName, ms, false );
 
 			const int stackTest = lua_gettop(L);
@@ -116,8 +121,12 @@ namespace Udb
 			if( !lua_isnil( L, -1 ) )
 				luaL_error( L, "cannot write to '%s'", fieldName.data() );
 			const quint32 atom = LuaBinding::getAtom( fieldName, obj->getTxn() );
-			if( atom == 0 )
+			if( atom == 0 || !LuaBinding::isWritable(atom,*obj) )
 				luaL_error( L, "cannot write to '%s'", fieldName.data() );
+			else
+			{
+				obj->setValue( atom, LuaBinding::toValue( L, 3 ) );
+			}
 			return 0;
 		}
 	};
