@@ -1,11 +1,11 @@
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -139,7 +139,7 @@ bool BtreeCursor::moveNext()
 	int res = sqlite3BtreeNext( d_cur, &eof );
 	if( res != SQLITE_OK )
 		throw DatabaseException( DatabaseException::AccessCursor, sqlite3ErrStr( res ) );
-	// falls eof befindet sich der Cursor nicht mehr auf einem gültigen Eintrag
+	// falls eof befindet sich der Cursor nicht mehr auf einem gÃ¼ltigen Eintrag
 	return eof == 0;
 }
 
@@ -151,7 +151,7 @@ bool BtreeCursor::movePrev()
 	int res = sqlite3BtreePrevious( d_cur, &bof );
 	if( res != SQLITE_OK )
 		throw DatabaseException( DatabaseException::AccessCursor, sqlite3ErrStr( res ) );
-	// falls eof befindet sich der Cursor nicht mehr auf einem gültigen Eintrag
+	// falls eof befindet sich der Cursor nicht mehr auf einem gÃ¼ltigen Eintrag
 	return bof == 0;
 }
 
@@ -172,15 +172,15 @@ bool BtreeCursor::moveTo( const QByteArray& key, bool partial )
 		throw DatabaseException( DatabaseException::AccessCursor, sqlite3ErrStr( res ) );
 	if( partial )
 	{
-		// Ziel ist die Position auf den ersten Wert zu setzen, von startsWith(key) erfüllt ist.
-		// bei false ist Position entweder auf nächst grösserem Wert als key oder über Rand hinaus.
+		// Ziel ist die Position auf den ersten Wert zu setzen, von startsWith(key) erfÃ¼llt ist.
+		// bei false ist Position entweder auf nÃ¤chst grÃ¶sserem Wert als key oder Ã¼ber Rand hinaus.
 		if( compare == 0 )
 			return true;
 		else if( compare > 0 )
 			return readKey().startsWith( key );
 		else
 		{
-			if( !moveNext() ) // moveNext verschiebt den Cursor allenfalls über den Schluss hinaus
+			if( !moveNext() ) // moveNext verschiebt den Cursor allenfalls Ã¼ber den Schluss hinaus
 				return false;
 			else
 				return readKey().startsWith( key );
@@ -209,3 +209,4 @@ void BtreeCursor::removePos()
 	if( res != SQLITE_OK )
 		throw DatabaseException( DatabaseException::AccessCursor, sqlite3ErrStr( res ) );
 }
+

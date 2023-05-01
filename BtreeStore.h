@@ -2,13 +2,13 @@
 #define __Udb_BtreeStore__
 
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -35,7 +35,7 @@ namespace Udb
 	class BtreeStore : public QObject
 	{
 	public:
-		// ReadLock und WriteLock können rekursiv und auch verschachtelt aufgerufen werden.
+		// ReadLock und WriteLock kÃ¶nnen rekursiv und auch verschachtelt aufgerufen werden.
 		class ReadLock // Serialisiert Lese/Schreibzugriff auf Store
 		{
 		public:
@@ -44,7 +44,7 @@ namespace Udb
 		private:
 			BtreeStore* d_db;
 		};
-		class WriteLock // Automatisiert aufruf von transBegin/transCommit und führt auch Lock durch
+		class WriteLock // Automatisiert aufruf von transBegin/transCommit und fÃ¼hrt auch Lock durch
 		{
 		public:
 			WriteLock( BtreeStore* );

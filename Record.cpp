@@ -1,11 +1,11 @@
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -32,7 +32,7 @@ Record::Record()
 void Record::writeField( BtreeCursor& cur, OID oid, Atom a, const Stream::DataCell& v )
 {
 	DataWriter w;
-	w.writeSlot( DataCell().setOid( oid ) ); // Wir verwenden Multybyte64, wahrscheinlich genügt 32bit
+	w.writeSlot( DataCell().setOid( oid ) ); // Wir verwenden Multybyte64, wahrscheinlich genÃ¼gt 32bit
 	w.writeSlot( DataCell().setAtom( a ) );
 
 	if( v.isNull() )
@@ -46,7 +46,7 @@ void Record::writeField( BtreeCursor& cur, OID oid, Atom a, const Stream::DataCe
 void Record::readField( BtreeCursor& cur, OID oid, Atom a, Stream::DataCell& v )
 {
 	DataWriter w;
-	w.writeSlot( DataCell().setOid( oid ) ); // Wir verwenden Multybyte64, wahrscheinlich genügt 32bit
+	w.writeSlot( DataCell().setOid( oid ) ); // Wir verwenden Multybyte64, wahrscheinlich genÃ¼gt 32bit
 	w.writeSlot( DataCell().setAtom( a ) );
 
 	if( cur.moveTo( w.getStream() ) )

@@ -1,11 +1,11 @@
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -95,7 +95,7 @@ void BtreeStore::setCacheSize( int numOfPages )
 {
 	checkOpen();
 	// keine wesentliche Wirkung: 
-	// Default-Grösse ist 100. Minimalgrösse ist 10.
+	// Default-GrÃ¶sse ist 100. MinimalgrÃ¶sse ist 10.
 	sqlite3BtreeSetCacheSize( getBt(), numOfPages );
 	// Es gilt SQLITE_MAX_PAGE_COUNT, zur Zeit 1'073'741'823
 }

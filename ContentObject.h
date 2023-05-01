@@ -2,13 +2,13 @@
 #define CONTENTOBJECT_H
 
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -30,7 +30,7 @@ namespace Udb
 		static quint32 AttrCreatedOn;   // DateTime
 		static quint32 AttrModifiedOn;  // DateTime
 		static quint32 AttrIdent;       // String, wird bei einigen Klassen mit automatischer ID gesetzt
-		static quint32 AttrAltIdent;    // String, der User kann seine eigene ID verwenden, welche die automatische übersteuert
+		static quint32 AttrAltIdent;    // String, der User kann seine eigene ID verwenden, welche die automatische Ã¼bersteuert
 		static quint32 AttrText;        // String, RTXT oder HTML, optional; anzeigbarer Titel/Text des Objekts
 
         ContentObject( const Udb::Obj& o ):Udb::Obj(o){}

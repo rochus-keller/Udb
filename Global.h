@@ -2,13 +2,13 @@
 #define _Udb_Global_H
 
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -45,8 +45,8 @@ namespace Udb
 		KeyList getKeyAsList() const; // throws exception if key is not BML
 		Stream::DataCell getValueAsCell() const;
 		bool firstKey();
-		bool nextKey(); // false..kein Nachfolger, unver‰ndert
-		bool prevKey(); // false..kein Vorg‰nger, unver‰ngert
+		bool nextKey(); // false..kein Nachfolger, unver√§ndert
+		bool prevKey(); // false..kein Vorg√§nger, unver√§ngert
 
 		Git& operator=( const Git& r ) { return assign( r ); }
 		Git& assign( const Git& r );
@@ -79,7 +79,7 @@ namespace Udb
 		void clearAllCells();
 		Git findCells( const QByteArray& key ) const;
 		Git findCells( const KeyList& key ) const;
-		void commit(); // l‰uft nicht ¸ber Transaction, sondern direkt
+		void commit(); // l√§uft nicht √ºber Transaction, sondern direkt
 		void rollback();
 	protected:
 		void checkOpen() const;

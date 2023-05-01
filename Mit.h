@@ -2,13 +2,13 @@
 #define _Udb_Mit_
 
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -48,8 +48,8 @@ namespace Udb
 		Stream::DataCell getValue() const;
 		KeyList getKey() const;
 		bool firstKey();
-		bool nextKey(); // false..kein Nachfolger, unver‰ndert
-		bool prevKey(); // false..kein Vorg‰nger, unver‰ngert
+		bool nextKey(); // false..kein Nachfolger, unver√§ndert
+		bool prevKey(); // false..kein Vorg√§nger, unver√§ngert
 
 		Mit& operator=( const Mit& r ) { return assign( r ); }
 		Mit& assign( const Mit& r );
@@ -80,8 +80,8 @@ namespace Udb
 		Stream::DataCell getValue() const;
 		QByteArray getKey() const;
 		bool firstKey();
-		bool nextKey(); // false..kein Nachfolger, unver‰ndert
-		bool prevKey(); // false..kein Vorg‰nger, unver‰ngert
+		bool nextKey(); // false..kein Nachfolger, unver√§ndert
+		bool prevKey(); // false..kein Vorg√§nger, unver√§ngert
 
 		Xit& operator=( const Xit& r ) { return assign( r ); }
 		Xit& assign( const Xit& r );

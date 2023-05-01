@@ -160,7 +160,7 @@ void ObjIndexMdl::fetchMore ( const QModelIndex & parent )
             n++;
         }
 	}while( n < maxBatch && d_idx.nextKey() );
-    // Zuerst n<max prüfen, da sonst nextKey aufgerufen auch wenn Abbruch; damit geht Datensatz verloren
+    // Zuerst n<max prÃ¼fen, da sonst nextKey aufgerufen auch wenn Abbruch; damit geht Datensatz verloren
     if( n > 0 )
     {
         beginInsertRows( parent, d_ids.size() - n, d_ids.size() - 1 );

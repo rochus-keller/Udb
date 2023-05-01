@@ -2,13 +2,13 @@
 #define Udb_InvQueueMdl_H
 
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -33,7 +33,7 @@ namespace Udb
 		Q_OBJECT
 	public:
 		enum Role { 
-			// Defaultmässig wird die oid des Objekts zurückgeliefert
+			// DefaultmÃ¤ssig wird die oid des Objekts zurÃ¼ckgeliefert
 			SlotNrRole = Qt::UserRole + 1
 		};
 

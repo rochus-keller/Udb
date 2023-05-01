@@ -33,20 +33,20 @@ namespace Udb
              AttrType = 0xffffff86 }; // Damit man nach Parent und Type indizieren kann
 
 		// TODO: Index optional auf gewisse Types Eingrenzen
-		// TODO: Index optional für alle Elemente NonNull fordern
+		// TODO: Index optional fÃ¼r alle Elemente NonNull fordern
 
-		// Die Enums sind persistent. Vorsicht bei Änderung.
+		// Die Enums sind persistent. Vorsicht bei Ã„nderung.
 		enum Kind 
 		{ 
-			Value = 1,	// Mehrere Items zulässig. Diese werden einfach binär hintereinandergefügt.
-			Unique = 2 // Value, aber Wert der Items wird ohne nachgestellte ID gespeichert. Nur für Value
+			Value = 1,	// Mehrere Items zulÃ¤ssig. Diese werden einfach binÃ¤r hintereinandergefÃ¼gt.
+			Unique = 2 // Value, aber Wert der Items wird ohne nachgestellte ID gespeichert. Nur fÃ¼r Value
 		};
 		Kind d_kind;
 
 		enum Collation 
 		{ 
 			None = 0, // Ergebnis UTF-8
-			NFKD_CanonicalBase = 1 // Mache QChar::decompose und verwende bei QChar::Canonical nur Basiszeichen für Vergleich, sonst alles, Ergebnis UTF-8
+			NFKD_CanonicalBase = 1 // Mache QChar::decompose und verwende bei QChar::Canonical nur Basiszeichen fÃ¼r Vergleich, sonst alles, Ergebnis UTF-8
 		};
 
 		struct Item

@@ -31,8 +31,8 @@ namespace Udb
 		enum Kind
 		{
 			ObjectCreated,	// id=oid, name=type
-			ValueChanged,	// id=oid, name=field, für Obj::setValue
-			TypeChanged,	// id=oid, name=new_type, before=old_type, für Obj::setType
+			ValueChanged,	// id=oid, name=field, fÃ¼r Obj::setValue
+			TypeChanged,	// id=oid, name=new_type, before=old_type, fÃ¼r Obj::setType
 			Aggregated,		// id=object parent=oid, before (0==last)
 			Deaggregated,	// id=object parent=oid name2=type
 			ObjectErased,	// id=oid, name=type

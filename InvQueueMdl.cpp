@@ -1,11 +1,11 @@
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -165,8 +165,8 @@ int InvQueueMdl::fetch( int max, QList<quint32>* l ) const
 		if( !i.prev() )
 			return 0;
 	}
-	// Wir gehen vom letzten (neusten) Slot richtung erstem (ältestem) und 
-	// fügen die Slots an das Ende der Liste
+	// Wir gehen vom letzten (neusten) Slot richtung erstem (Ã¤ltestem) und 
+	// fÃ¼gen die Slots an das Ende der Liste
 	int n = 0;
 	if( !i.isNull() ) do
 	{
@@ -206,7 +206,7 @@ void InvQueueMdl::onDbUpdate( Udb::UpdateInfo info )
 		return;
 	if( info.d_kind == Udb::UpdateInfo::QueueAdded && info.d_parent == d_queue.getOid() )
 	{
-		// in d_slots sind die jüngsten Slots zuoberst
+		// in d_slots sind die jÃ¼ngsten Slots zuoberst
 		beginInsertRows( QModelIndex(), 0, 0 );
 		d_slots.prepend( info.d_id );
 		endInsertRows();
@@ -231,8 +231,9 @@ void InvQueueMdl::onDbUpdate( Udb::UpdateInfo info )
 
 void InvQueueMdl::refill()
 {
+    beginResetModel();
 	d_slots.clear();
-	reset();
+    endResetModel();
 }
 
 QVariant InvQueueMdl::data( const Udb::Obj&, int role ) const

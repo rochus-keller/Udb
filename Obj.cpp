@@ -1,11 +1,11 @@
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -25,6 +25,7 @@
 #include "UpdateInfo.h"
 #include <QtDebug>
 #include <QMimeData>
+#include <QUrlQuery>
 using namespace Udb;
 using namespace Stream;
 
@@ -227,14 +228,14 @@ void Obj::aggregateTo(const Obj& parent, const Obj& before)
     if( !before.isNull() )
     {
         if( !before.getParent().equals( parent ) )
-            // Wir haben zwar einen before, aber der gehˆrt nicht zum gew¸nschten Parent
+            // Wir haben zwar einen before, aber der geh√∂rt nicht zum gew√ºnschten Parent
             throw DatabaseException( DatabaseException::WrongContext );
 
         const OID beforeBefore = d_txn->getIdField( before.d_oid, Record::FieldPrevObj );
 
 		if( beforeBefore == 0 )
 		{
-			// Es gibt kein Aggregat vor Before. F¸ge this als erstes in Parent ein
+			// Es gibt kein Aggregat vor Before. F√ºge this als erstes in Parent ein
 			d_txn->setField( before.d_oid, Record::FieldPrevObj, DataCell().setOid( d_oid ) );
 			d_txn->setField( d_oid, Record::FieldNextObj, DataCell().setOid( before.d_oid ) );
 			d_txn->setField( parent.d_oid, Record::FieldFirstObj, DataCell().setOid( d_oid ) );
@@ -406,7 +407,7 @@ quint32 Obj::decCounter(Atom name)
 void Obj::getValue( quint32 name, Stream::DataCell& v, bool forceOldValue ) const
 {
 	checkNull();
-	if( name == 0 ) // kein g¸ltigerName f¸hrt immer zu Null-Ergebnis
+	if( name == 0 ) // kein g√ºltigerName f√ºhrt immer zu Null-Ergebnis
 		v.setNull();
 	else
 		d_txn->getField( d_oid, name, v, forceOldValue );
@@ -582,7 +583,7 @@ Stream::DataCell Obj::getCell( const QByteArray& key ) const
 
 Mit Obj::findCells( const KeyList& key ) const
 {
-	// NOTE: mit findCells(KeyList()) erh‰lt man alle Keys. Dagegen erh‰lt man auch
+	// NOTE: mit findCells(KeyList()) erh√§lt man alle Keys. Dagegen erh√§lt man auch
 	// Schrott, wenn man direkt Mit(Obj) und firstKey aufruft.
 	if( d_oid == 0 )
 		return Mit();
@@ -660,7 +661,7 @@ QList<Udb::Obj> Obj::readObjectRefs(const QMimeData *data, Udb::Transaction *txn
     Stream::DataReader r( data->data(QLatin1String( Udb::Obj::s_mimeObjectRefs )) );
     Stream::DataReader::Token t = r.nextToken();
     if( t != Stream::DataReader::Slot || r.getValue().getUuid() != txn->getDb()->getDbUuid() )
-        return res; // Objekte leben in anderer Datenbank; kein Move mˆglich.
+        return res; // Objekte leben in anderer Datenbank; kein Move m√∂glich.
     t = r.nextToken();
     while( t == Stream::DataReader::Slot && r.getValue().isOid() )
     {
@@ -701,13 +702,15 @@ QUrl Obj::objToUrl(const Obj & o, Atom id, Atom txt )
 	QUrl url = oidToUrl( o.getOid(), o.getDb()->getDbUuid() );
 	if( id != 0 || txt != 0 )
 	{
-		url.setQueryDelimiters( '=', ';' );
+        QUrlQuery q;
+        q.setQueryDelimiters( '=', ';' );
 		QList<QPair<QString, QString> > items;
 		if( id != 0 && o.hasValue( id ) )
 			items.append( qMakePair( QString("id"), o.getString(id) ) );
 		if( txt != 0 )
 			items.append( qMakePair( QString("txt"), o.getString(txt) ) );
-		url.setQueryItems( items );
+        q.setQueryItems( items );
+        url.setQuery(q);
 	}
 	return url;
 }

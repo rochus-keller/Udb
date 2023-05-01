@@ -1,11 +1,11 @@
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -108,7 +108,7 @@ bool Idx::next()
 		return true;
 	}else
     {
-		// d_cur.clear(); // Nein, sonst beginnt bei n‰chstem next wieder von vorne!
+		// d_cur.clear(); // Nein, sonst beginnt bei n√§chstem next wieder von vorne!
 		return false;
     }
 }
@@ -286,7 +286,7 @@ void Idx::addElement( QByteArray& out, const IndexMeta::Item& i, const Stream::D
 			collate( cell, i.d_coll, v.getStr() );
 		break;
 	default:
-		// Alle ¸brigen Typen inkl. TypeHtml etc.
+		// Alle √ºbrigen Typen inkl. TypeHtml etc.
 		cell = v.writeCell(true); // Es werden nur die Daten ohne vorangehende Typinformation geschrieben.
 		break;
 	}
@@ -312,14 +312,14 @@ void Idx::collate( QByteArray& out, quint8 c, const QString& in )
 			switch( in[i].decompositionTag() )
 			{
 			case QChar::NoDecomposition:
-				c = in[i].toAscii();
+                c = in[i].toLatin1();
 				if( c & 0x80 )// > 127
 					out += QString( c ).toUtf8();
 				else
 					out += c;
 				break;
 			case QChar::Canonical:
-				c = in[i].decomposition()[0].toAscii();
+                c = in[i].decomposition()[0].toLatin1();
 				if( c & 0x80 )// > 127
 					out += QString( c ).toUtf8();
 				else
@@ -345,7 +345,7 @@ void Idx::rebuildIndex()
 {
 	checkNull();
 	Database::TxnGuard lock( d_txn->getDb());
-	// Lˆsche zuerst den Index
+	// L√∂sche zuerst den Index
 	d_txn->getStore()->clearTable( d_idx );
 
 	IndexMeta meta;
@@ -354,7 +354,7 @@ void Idx::rebuildIndex()
 	BtreeCursor cur;
 	cur.open( d_txn->getStore(), d_idx, true );
 
-	// Gehe dann durch alle Objekte durch und erstelle Eintr‰ge neu
+	// Gehe dann durch alle Objekte durch und erstelle Eintr√§ge neu
 	Extent e( d_txn );
 	QByteArray key;
 	key.reserve( 255 ); // RISK

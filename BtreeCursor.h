@@ -1,13 +1,13 @@
 #ifndef __Udb_BtreeCursor__
 #define __Udb_BtreeCursor__
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -28,7 +28,7 @@ namespace Udb
 	class BtreeStore;
 
 	// Interne Klasse
-	// Ein BtreeCursor repräsentiert einen Sqlite-Btree-Table mit einem Qt-kompatiblen Interface
+	// Ein BtreeCursor reprÃ¤sentiert einen Sqlite-Btree-Table mit einem Qt-kompatiblen Interface
 	class BtreeCursor // Value
 	{
 	public:
@@ -48,14 +48,14 @@ namespace Udb
 		bool isValidPos(); 
 
 		// moveTo (egal ob partial oder nicht):
-		// bei false ist Position entweder auf nächst grösserem Wert als key oder über
+		// bei false ist Position entweder auf nÃ¤chst grÃ¶sserem Wert als key oder Ã¼ber
 		// das Ende hinaus, bzw. !isValidPos.
 
 		// Read/Write
-		void insert( const QByteArray& key, const QByteArray& value ); // Unabhängig von Pos
+		void insert( const QByteArray& key, const QByteArray& value ); // UnabhÃ¤ngig von Pos
 		QByteArray readKey() const; // Pos
 		QByteArray readValue() const; // Pos
-		void removePos(); // VORSICHT: danach zeigt Cursor ins Kraut! Also nicht geeignet für Move-Loops!
+		void removePos(); // VORSICHT: danach zeigt Cursor ins Kraut! Also nicht geeignet fÃ¼r Move-Loops!
 
 		BtreeStore* getDb() const { return d_db; }
 	protected:

@@ -2,13 +2,13 @@
 #define __Udb_Transaction__
 
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -78,7 +78,7 @@ namespace Udb
 		Database* getDb() const { return d_db; }
 		Atom getAtom( const QByteArray& name ) const; // convenience for Database
 		QByteArray getAtomString( Atom ) const; // convenience for Database
-		bool isReadOnly() const; // convenience für Database
+		bool isReadOnly() const; // convenience fÃ¼r Database
 		const Changes& getChanges() const { return d_changes; }
 	signals:
 		void notify( Udb::UpdateInfo );  // Pre-Commit Notify

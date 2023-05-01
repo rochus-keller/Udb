@@ -1,11 +1,11 @@
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -75,7 +75,7 @@ bool Transaction::isReadOnly() const
 
 void Transaction::checkLock( OID oid )
 {
-	// NOTE: Caller ist für Database::Lock verantwortlich
+	// NOTE: Caller ist fÃ¼r Database::Lock verantwortlich
 	QHash<quint32,Transaction*>::const_iterator i = d_db->d_objLocks.find( oid );
 	if( i != d_db->d_objLocks.end() )
 	{
@@ -253,7 +253,7 @@ void Transaction::commit()
 		mCur.open( d_db->getStore(), d_db->getMapTable(), true );
         BtreeCursor xCur;
 		xCur.open( d_db->getStore(), d_db->getOixTable(), true );
-		// Changes beinhaltet pro Objekt und geändertem Feld einen Record.
+		// Changes beinhaltet pro Objekt und geÃ¤ndertem Feld einen Record.
 		for( i = d_changes.begin(); i != d_changes.end(); ++i )
 		{
 			if( i.key().first != oid )
@@ -261,17 +261,17 @@ void Transaction::commit()
 				// Wir sind in einem neuen Objekt angelangt.
 				skip = false;
 				oid = i.key().first;
-				// Lösche das Objekt falls nötig
+				// LÃ¶sche das Objekt falls nÃ¶tig
 				if( d_db->d_objDeletes.contains( oid ) )
 				{
-					// Lösche Record mit allen Bestandteilen aus Store und Indizes
+					// LÃ¶sche Record mit allen Bestandteilen aus Store und Indizes
 					d_db->d_objDeletes.removeAll( oid );
 					Record::Fields f = Record::getFields( objCur, oid );
 					for( int j = 0; j < f.size(); j++ )
 						removeFromIndex( oid, f[j], objCur );
 					Record::eraseFields( objCur, oid );
-					// TODO: OID an Freelist hängen
-					// Allfällige weitere geänderte Felder werden nach löschen ignoriert
+					// TODO: OID an Freelist hÃ¤ngen
+					// AllfÃ¤llige weitere geÃ¤nderte Felder werden nach lÃ¶schen ignoriert
 					_eraseQueue( oid, qCur, d_queue );
 					_eraseMap( oid, mCur, d_map );
                     _eraseMap( oid, xCur, d_oix );
@@ -345,12 +345,12 @@ void Transaction::rollback()
 		if( i.key().first != oid )
 		{
 			oid = i.key().first;
-			// Entferne die Löschung
+			// Entferne die LÃ¶schung
 			d_db->d_objDeletes.removeAll( oid );
 			// Entferne den Lock (falls vorhanden; nicht bei new)
 			d_db->d_objLocks.remove( oid );
 		}
-		// TODO: OIDs von neuen Objekten an Freelist hängen
+		// TODO: OIDs von neuen Objekten an Freelist hÃ¤ngen
 	}
 	d_changes.clear();
 	d_queue.clear();
@@ -495,15 +495,15 @@ void Transaction::removeFromIndex(OID id, Atom a, BtreeCursor& objCur)
 		{
 			if( meta.d_kind == IndexMeta::Value || meta.d_kind == IndexMeta::Unique )
 			{
-				// RISK: zur Zeit wird im Falle von Indizes mit mehreren Feldern dieser Code für jedes
-				// geänderte Feld pro Record einmal ausgeführt, was Rechenzeit kostet.
+				// RISK: zur Zeit wird im Falle von Indizes mit mehreren Feldern dieser Code fÃ¼r jedes
+				// geÃ¤nderte Feld pro Record einmal ausgefÃ¼hrt, was Rechenzeit kostet.
 				DataCell value;
 				bool allNull = true;
 				for( int j = 0; j < meta.d_items.size(); j++ )
 				{
-					// Gehe durch alle Felder des Index und erzeuge den Schlüsse anhand der aktuellen Werte in der DB.
-					// Der Änderungsspeicher ist hier irrelevant, da wir den bestehenden Indexeintrag löschen wollen,
-					// der vor der Änderung bestand.
+					// Gehe durch alle Felder des Index und erzeuge den SchlÃ¼sse anhand der aktuellen Werte in der DB.
+					// Der Ã„nderungsspeicher ist hier irrelevant, da wir den bestehenden Indexeintrag lÃ¶schen wollen,
+					// der vor der Ã„nderung bestand.
 					Record::readField( objCur, id, meta.d_items[j].d_atom, value );
 					if( !value.isNull() )
 						allNull = false;
@@ -518,7 +518,7 @@ void Transaction::removeFromIndex(OID id, Atom a, BtreeCursor& objCur)
 					cur.open( d_db->getStore(), idx[i], true );
 					if( cur.moveTo( key ) )
 					{
-						// Bei Unique Index nur die Indizes für die eigene ID entfernen.
+						// Bei Unique Index nur die Indizes fÃ¼r die eigene ID entfernen.
 						if( meta.d_kind != IndexMeta::Unique || cur.readValue() != idstr )
 							cur.removePos();
 					}
@@ -545,26 +545,26 @@ void Transaction::addToIndex(OID id, const Changes& all, Atom a, BtreeCursor& ob
 		{
 			if( meta.d_kind == IndexMeta::Value || meta.d_kind == IndexMeta::Unique )
 			{
-				// RISK: zur Zeit wird im Falle von Indizes mit mehreren Feldern dieser Code für jedes
-				// geänderte Feld pro Record einmal ausgeführt, was Rechenzeit kostet.
+				// RISK: zur Zeit wird im Falle von Indizes mit mehreren Feldern dieser Code fÃ¼r jedes
+				// geÃ¤nderte Feld pro Record einmal ausgefÃ¼hrt, was Rechenzeit kostet.
 				DataCell value;
 				bool allNull = true; 
 				for( int j = 0; j < meta.d_items.size(); j++ )
 				{
-					// Gehe durch alle Felder des Index und prüfe, ob das Feld entweder im Änderungsspeicher "all"
+					// Gehe durch alle Felder des Index und prÃ¼fe, ob das Feld entweder im Ã„nderungsspeicher "all"
 					// vorhanden ist, oder ob es aus der DB gelesen werden muss.
 					// Seit 5.9.10 werden auch Null-Werte in den Index geschrieben, wenn wenigstens ein Element nicht null ist.
 					Changes::const_iterator it = all.find( qMakePair( quint32(id), meta.d_items[j].d_atom ) );
 					if( it == all.end() )
 					{
-						// Das Feld wurde nicht geändert, sondern muss im Originalzustand aus der DB geholt werden.
+						// Das Feld wurde nicht geÃ¤ndert, sondern muss im Originalzustand aus der DB geholt werden.
 						Record::readField( objCur, id, meta.d_items[j].d_atom, value );
 						if( !value.isNull() )
 							allNull = false;
 						Idx::addElement( key, meta.d_items[j], value );
 					}else
 					{
-						// Das Feld liegt im Änderungsspeicher vor.
+						// Das Feld liegt im Ã„nderungsspeicher vor.
 						if( !it.value().isNull() )
 							allNull = false;
 						Idx::addElement( key, meta.d_items[j], it.value() );
@@ -573,7 +573,7 @@ void Transaction::addToIndex(OID id, const Changes& all, Atom a, BtreeCursor& ob
 				if( !key.isEmpty() && !allNull ) 
 				{
 					// Wir wollen den Key im Index, sobald mindestens ein Feld im Index einen Wert hat.
-					// Die darauf folgenden Felder können null sein; der Eintrag wird trotzdem angelegt.
+					// Die darauf folgenden Felder kÃ¶nnen null sein; der Eintrag wird trotzdem angelegt.
 					// Wenn das nicht so ist, werden z.B. Personen ohne Vornahmen nicht im Namen-Vornamen-Index angelegt.
 					if( meta.d_kind == IndexMeta::Value )
 						key += idstr; // OID ist Teil des Strings, damit sich mehrere gleiche Values unterscheiden lassen.
@@ -633,7 +633,7 @@ void Transaction::getQSlot( OID oid, quint32 nr, Stream::DataCell& v ) const
 	w.writeSlot( DataCell().setOid( oid ) );
 	if( nr != 0 )
 		w.writeSlot( DataCell().setId32( nr ) );
-	// nr == 0 gibt als Wert die maximale bisher vergebene nr zurück
+	// nr == 0 gibt als Wert die maximale bisher vergebene nr zurÃ¼ck
 	if( cur.moveTo( w.getStream() ) )
 	{
 		v.readCell( cur.readValue() );
@@ -737,7 +737,7 @@ void Transaction::post( const UpdateInfo& info )
 	d_notify.append( info );
 	try
 	{
-        // NOTE: wenn möglich auf notify verzichten; stattdessen sollen die Adressaten 
+        // NOTE: wenn mÃ¶glich auf notify verzichten; stattdessen sollen die Adressaten 
         // bei PreCommit die getPendingNotifications durchsehen
 		if( d_individualNotify )
 			doNotify( info ); // Pre-Commit

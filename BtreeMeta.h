@@ -2,13 +2,13 @@
 #define __Udb_BtreeMeta__
 
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -27,7 +27,7 @@ namespace Udb
 	class BtreeStore;
 
 	// Zugriff muss zwischen Threads serialisiert werden. Wir verwenden nicht SQLITE_THREADSAFE.
-	// Darum ist sowohl für lesen als auch schreiben ein vorgelagerter Mutex erforderlich.
+	// Darum ist sowohl fÃ¼r lesen als auch schreiben ein vorgelagerter Mutex erforderlich.
 	class BtreeMeta // Value
 	{
 	public:

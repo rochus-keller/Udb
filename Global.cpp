@@ -1,11 +1,11 @@
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -36,11 +36,11 @@ bool Global::open(quint32 id)
 	if( id == d_db->d_meta.d_objTable || id == d_db->d_meta.d_dirTable ||
 		id == d_db->d_meta.d_idxTable || id == d_db->d_meta.d_queTable ||
 		id == d_db->d_meta.d_mapTable || id == d_db->d_meta.d_oixTable )
-		return false; // id gehört einer internen Tabelle
+		return false; // id gehÃ¶rt einer internen Tabelle
 	BtreeCursor cur;
 	cur.open( d_db->getStore(), d_db->getIdxTable(), false );
 	if( cur.moveTo( Stream::DataCell().setId32( id ).writeCell() ) )
-		return false; // id gehört einem Index
+		return false; // id gehÃ¶rt einem Index
 	d_oix.clear();
 	d_table = id;
 	return true;

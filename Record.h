@@ -2,13 +2,13 @@
 #define __Udb_Record__
 
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -35,14 +35,14 @@ namespace Udb
 	public:
         enum ReservedFields
 		{
-            MinReservedField = 0xffffff80,  // Die obersten 127 Zahlen im 32-Bit-Bereich gehören also Udb selber
+            MinReservedField = 0xffffff80,  // Die obersten 127 Zahlen im 32-Bit-Bereich gehÃ¶ren also Udb selber
 			// Object:
             FieldParent,					// Object, das dieses Aggregat besitzt - Owner
-            FieldPrevObj, FieldNextObj,     // Vorheriges/nächstes aggregiertes Object mit gleichem Owner.
+            FieldPrevObj, FieldNextObj,     // Vorheriges/nÃ¤chstes aggregiertes Object mit gleichem Owner.
             FieldFirstObj, FieldLastObj,    // Liste der im Aggregat enthaltenen Objects.
 			// Mixed
             FieldType                       // Speichert den Type des Object als Atom; bei Types steht also der ganze
-                                            // 32-Bit-Bereich zur Verfügung (bei Atoms nur bis MinReservedField, s.o.)
+                                            // 32-Bit-Bereich zur VerfÃ¼gung (bei Atoms nur bis MinReservedField, s.o.)
 		};
 		Record();
 
@@ -73,7 +73,7 @@ namespace Udb
 	<oid> -> <id32> // next id
 	<oid> <id32> -> <cell>
 
-	Listenelemente: braucht es eigentlich nicht. Man kann ja dafür einfach Objects nehmen
+	Listenelemente: braucht es eigentlich nicht. Man kann ja dafÃ¼r einfach Objects nehmen
 	<oid> -> <id32> // next id
 	<oid> <id32> -> <id32> <id32> [ <uuid> | null ] <cell>	// prev, next
 	<uuid> -> <oid> <id32>

@@ -1,11 +1,11 @@
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -128,7 +128,7 @@ bool Qit::last()
 		// cur steht auf Ende oder Wert nach oid + nr
 		if( cur.isValidPos() )
 		{
-			// Wenn auf nächst grösserem Wert nach oid + nr, dann eins zurück
+			// Wenn auf nÃ¤chst grÃ¶sserem Wert nach oid + nr, dann eins zurÃ¼ck
 			if( !cur.movePrev() ) 
 				return false; // wir sind am Anfang, offensichtlich gibt es oid nicht in Queue
 		}else

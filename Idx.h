@@ -2,13 +2,13 @@
 #define __Udb_Idx__
 
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -55,7 +55,7 @@ namespace Udb
 		OID getOid();
 
 		void rebuildIndex(); // RISK: erstelle Index neu
-		void clearIndex(); // RISK: lösche Index-Inhalt
+		void clearIndex(); // RISK: lÃ¶sche Index-Inhalt
 
 		bool isNull() const { return d_idx == 0; }
 		Transaction* getTxn() const { return d_txn; }
@@ -63,7 +63,7 @@ namespace Udb
 		const QByteArray& getKey() const { return d_key; }
 		Idx& operator=( const Idx& r );
 
-        // Helper für Indexbau
+        // Helper fÃ¼r Indexbau
         static void addElement( QByteArray&, const IndexMeta::Item&, const Stream::DataCell& );
         // Values see IndexMeta::Collation
 		static void collate( QByteArray&, quint8 collation, const QString& );
@@ -71,7 +71,7 @@ namespace Udb
 		void checkNull() const;
 	private:
 		friend class Transaction;
-		// NOTE: Hier würde Database genügen. Da aber alle Txn benötigen, 
+		// NOTE: Hier wÃ¼rde Database genÃ¼gen. Da aber alle Txn benÃ¶tigen, 
 		// wird hier Txn-Pointer gespeichert
 		Transaction* d_txn;
 		int d_idx;

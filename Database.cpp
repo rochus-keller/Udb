@@ -1,11 +1,11 @@
 /*
-* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.info>
+* Copyright 2010-2017 Rochus Keller <mailto:me@rochus-keller.ch>
 *
 * This file is part of the CrossLine Udb library.
 *
 * The following is the license that applies to this copy of the
 * library. For a license to use the library under conditions
-* other than those described here, please email to me@rochus-keller.info.
+* other than those described here, please email to me@rochus-keller.ch.
 *
 * GNU General Public License Usage
 * This file may be used under the terms of the GNU General Public
@@ -158,7 +158,7 @@ void Database::close()
 		delete d_db;
 	d_db = 0;
 	d_meta = Meta();
-	// TODO: d_cache + Records löschen
+	// TODO: d_cache + Records lÃ¶schen
 }
 
 void Database::loadMeta()
@@ -387,10 +387,10 @@ void Database::presetAtom( const QByteArray& name, quint32 atom )
 	QHash<QByteArray,quint32>::const_iterator i = d_dir.find( name );
 	if( i != d_dir.end() )
 	{
-		// Name ist bereits im Cache. Prüfe nun ob ID übereinstimmt.
+		// Name ist bereits im Cache. PrÃ¼fe nun ob ID Ã¼bereinstimmt.
 		if( i.value() != atom )
 			throw DatabaseException( DatabaseException::DuplicateAtom );
-		// Name wurde bereits im Cache registriert mit gewünschter Atom-ID
+		// Name wurde bereits im Cache registriert mit gewÃ¼nschter Atom-ID
 		return; 
 	}
 	const QByteArray n = DataCell().setLatin1(name).writeCell();
@@ -407,19 +407,19 @@ void Database::presetAtom( const QByteArray& name, quint32 atom )
 			throw DatabaseException( DatabaseException::DirectoryFormat );
 		if( v.getAtom() != atom )
 			throw DatabaseException( DatabaseException::DuplicateAtom );
-		// Prüfe nun, ob Atom-ID bereits in der DB vorhanden. 
+		// PrÃ¼fe nun, ob Atom-ID bereits in der DB vorhanden. 
 		if( cur.moveTo( a ) )
 		{
 			if( cur.readValue() != n )
 				// Darf in einer korrekten DB nicht vorkommen.
 				throw DatabaseException( DatabaseException::DirectoryFormat );
 		}
-		// Name ist in Db vorhanden mit gewünschter Atom-ID
+		// Name ist in Db vorhanden mit gewÃ¼nschter Atom-ID
 		return;
 	}else
 		a = DataCell().setAtom( atom ).writeCell();
 	cur.close();
-	// Füge Atom in Db ein
+	// FÃ¼ge Atom in Db ein
 	if( !d_db->isReadOnly() )
 	{
 		BtreeStore::WriteLock txn( d_db );
@@ -432,10 +432,10 @@ void Database::presetAtom( const QByteArray& name, quint32 atom )
 			if( v.getType() != DataCell::TypeAtom )
 				throw DatabaseException( DatabaseException::DirectoryFormat );
 			if( atom > v.getAtom() )
-				// Erhöhe den Zähler auf mindestens die Preset-ID
+				// ErhÃ¶he den ZÃ¤hler auf mindestens die Preset-ID
 				cur.insert( null, a );
 		}else
-			// Zähler war noch nicht vorhanden
+			// ZÃ¤hler war noch nicht vorhanden
 			cur.insert( null, a );
 		cur.insert( n, a );
 		cur.insert( a, n );
@@ -705,7 +705,7 @@ bool Database::clearIndexContents( Index id )
 	BtreeCursor cur;
 	cur.open( d_db, getIdxTable(), false );
 	if( !cur.moveTo( DataCell().setId32( id ).writeCell() ) )
-		return false; // id gehört nicht zu einem Index
+		return false; // id gehÃ¶rt nicht zu einem Index
 	d_db->clearTable( id );
 	return true;
 }
