@@ -170,10 +170,11 @@ void ObjIndexMdl::fetchMore ( const QModelIndex & parent )
 
 void ObjIndexMdl::refill()
 {
-	d_ids.clear();
+    beginResetModel();
+    d_ids.clear();
 	d_refetch = true;
-	reset();
-	fetchMore( QModelIndex() ); // Hole die ersten paar, damit nach seek gleich schon was da ist
+    endResetModel();
+    fetchMore( QModelIndex() ); // Hole die ersten paar, damit nach seek gleich schon was da ist
 }
 
 void ObjIndexMdl::onDbUpdate( const UpdateInfo &info )
